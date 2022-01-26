@@ -42,15 +42,23 @@ public class PlayerMovement : MonoBehaviour
         // Get the player's current location 
         float v = Input.GetAxis("Vertical"); // W + S up and down
         float h = Input.GetAxis("Horizontal"); // A + D left and right
-        float j = 15;
+        float j = 10;
 
         // Use the player's current location to move them by speed on a vector.
         //transform.position += (transform.right * h + transform.forward * v) * speed * Time.deltaTime;
         Vector3 speed = (transform.right * h + transform.forward * v) * moveSpeed;
+        //pawn.SimpleMove(speed);
+
+
+        if(Input.GetKeyDown(KeyCode.Space) == true)
+        {
+            Debug.Log("Jump");
+            Vector3 jump = (transform.right * h + transform.forward *v + transform.up * j) * moveSpeed;
+            
+            pawn.Move(jump);
+        }
+        
         pawn.SimpleMove(speed);
-
-        if(Input.GetKeyDown(KeyCode.Space)) speed = (transform.right * h + transform.forward * v + transform.up * j) * moveSpeed;
-
 
 
         // Move the player along the vector.

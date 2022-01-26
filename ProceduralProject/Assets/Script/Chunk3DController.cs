@@ -58,7 +58,7 @@ public class Chunk3DController : MonoBehaviour
                     Vector3 pos = new Vector3(x, y, z) * voxelSize;
 
 
-                    float val = Noise.Perlin(new Vector3(x, y, z) / zoom) + y/100;
+                    float val = Noise.Perlin(new Vector3(x, y, z) / zoom);
 
                     if (val > threshold)
                     {

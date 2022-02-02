@@ -152,10 +152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28947806c289344b9e9a84970e4c27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomSize: 1
+  res: 10
   t1: {fileID: 127201203976870470, guid: 3ada673480463994bb303d9fd6b4434e, type: 3}
   t2: {fileID: 127201203976870470, guid: 402b91a53d4395e499af638970723402, type: 3}
   t3: {fileID: 127201203976870470, guid: c88af468be9ba8946942cfc547e4da49, type: 3}
   t4: {fileID: 127201203976870470, guid: 5f821d1f7b915c242a85ad2652196bbb, type: 3}
+  parent: {fileID: 126029552}
 --- !u!4 &126029552
 Transform:
   m_ObjectHideFlags: 0

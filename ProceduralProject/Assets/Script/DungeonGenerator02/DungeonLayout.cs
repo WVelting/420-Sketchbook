@@ -175,7 +175,7 @@ public class DungeonLayout
         rooms[x, y] = val;
     }
 
-    private int GetBigRoom(int x, int y)
+    public int GetBigRoom(int x, int y)
     {
 
         if (bigRooms == null) return 0;

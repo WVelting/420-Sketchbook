@@ -31,6 +31,7 @@ public class DungeonSpawner : MonoBehaviour
                 Vector3 pos = new Vector3(x, 0, y) * spaceBetweenRooms;
 
                 Room newRoom = Instantiate(prefabRoom, pos, Quaternion.identity);
+                
                 newRoom.InitRoom((RoomType)rooms[x,y]);
             }
         }

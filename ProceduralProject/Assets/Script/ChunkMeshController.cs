@@ -36,7 +36,7 @@ public class ChunkMeshController : MonoBehaviour
     public NoiseField[] fields;
 
     [Range(0,1)]
-    public float densityThreshold = 0.5f;
+    private float densityThreshold = Random.Range(0f, .9f);
 
     private MeshFilter meshFilter;
     private MeshCollider meshCollider;

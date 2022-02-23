@@ -12,7 +12,7 @@ void setup() {
   size(800, 600);
 
   //spawn agents
-  for (int i = 0; i < 1000; i ++) agents.add(new Agent(10, 100));
+  for (int i = 0; i < 100; i ++) agents.add(new Agent(10, 100));
   
   Agent sun = new Agent(1000, 10000);
   sun.position = new PVector(width/2, height/2);

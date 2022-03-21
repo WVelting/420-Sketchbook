@@ -34,13 +34,16 @@ public class Boid : MonoBehaviour
         
     }
 
-    void CalcForces(Boid[] boids)
+    public void CalcForces(Boid[] boids)
     {
 
         BoidSettings settings = BoidManager.GetSettings(type);
         //Alignment
         //Cohesion
         //Separation
+
+        Vector3 avgCenter = Vector3.zero;
+        int numCohesion = 0;
 
 
         foreach(Boid b in boids)
@@ -56,6 +59,8 @@ public class Boid : MonoBehaviour
             }
             if(d < settings.radiusCohesion)
             {
+                avgCenter += b.transform.position;
+                numCohesion++;
 
             }
             if(d < settings.radiusSeparation)
@@ -68,5 +73,19 @@ public class Boid : MonoBehaviour
         //TODO:
         //apply alignment steering force
         //apply cohesion steering force
+        if(numCohesion > 0) 
+        {
+            avgCenter /= numCohesion;
+
+            Vector3 vToCenter = avgCenter - transform.position;
+            Vector3 desiredVelocity = vToCenter.normalized * settings.maxSpeed;
+
+            Vector3 forceCohesion = desiredVelocity - body.velocity;
+
+            if(forceCohesion.sqrMagnitude > Mathf.Pow(settings.maxForce, 2)) forceCohesion = forceCohesion.normalized * settings.maxForce;
+
+
+            body.AddForce(forceCohesion * settings.forceCohesion * Time.deltaTime);
+        }
     }
 }

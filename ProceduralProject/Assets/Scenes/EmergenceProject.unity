@@ -240,13 +240,13 @@ MonoBehaviour:
   - type: 1
     prefab: {fileID: 2424097931165524886, guid: 045ff24acc877e941b63a4f8a3047d28, type: 3}
     maxSpeed: 5
-    maxForce: 2
+    maxForce: 1
     radiusAlignment: 200
-    radiusCohesion: 100
-    radiusSeparation: 100
+    radiusCohesion: 8
+    radiusSeparation: 5
     forceAlignment: 0.5
-    forceCohesion: 0.25
-    forceSeparation: 10
+    forceCohesion: 500
+    forceSeparation: 800
   - type: 0
     prefab: {fileID: 7920693494113418858, guid: cfc2c1dd414cc4b4eb9ed690b677e194, type: 3}
     maxSpeed: 0

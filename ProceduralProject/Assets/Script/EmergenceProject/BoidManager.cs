@@ -59,13 +59,25 @@ public class BoidManager : MonoBehaviour
 
     void Update()
     {
-        if(boids.Count < 2)
+
+        // if not enough boids, spawn boids:
+
+        if(boids.Count < 5)
         {
             if(settings.Length> 0)
             {
                 Boid b = Instantiate(settings[0].prefab);
                 b.type = settings[0].type;
             }
+        }
+
+        // update the boids:
+
+        Boid[] bArray = boids.ToArray();
+
+        foreach(Boid b in boids)
+        {
+            b.CalcForces(bArray);
         }
     }
     

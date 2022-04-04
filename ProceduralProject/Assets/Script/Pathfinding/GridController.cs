@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GridController : MonoBehaviour
@@ -35,7 +36,7 @@ public class GridController : MonoBehaviour
         }
     }
 
-    void MakeNodes()
+    public void MakeNodes()
     {
         Pathfinder.Node[,] nodes = new Pathfinder.Node[cubes.GetLength(0), cubes.GetLength(1)];
         for(int x = 0; x < cubes.GetLength(0); x++)
@@ -90,5 +91,19 @@ public class GridController : MonoBehaviour
         ];
 
         List<Pathfinder.Node> path = Pathfinder.Solve(start, end);
+        print(path.Count);
+    }
+}
+
+[CustomEditor(typeof(GridController))]
+class GridControllerEditor : Editor {
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        if(GUILayout.Button("Find a Path"))
+        {
+            (target as GridController).MakeNodes();
+        }
     }
 }

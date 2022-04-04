@@ -96,6 +96,9 @@ public static class Pathfinder
                 }
                 
             }
+
+            closed.Add(current);
+            open.Remove(current);
             if(isDone) break;
 
         }
@@ -110,7 +113,7 @@ public static class Pathfinder
 
         //3. reverse path
         path.Reverse();
-        
+
         return path; 
     }
 }

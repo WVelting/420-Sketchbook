@@ -3,24 +3,31 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+
+[RequireComponent(typeof(LineRenderer))]
 public class GridController : MonoBehaviour
 {
 
     delegate Pathfinder.Node LookupDelegate(int x, int y);
 
     public TerrainCube cubePrefab;
+    public Transform helperStart;
+    public Transform helperEnd;
 
     private TerrainCube[,] cubes;
+    private LineRenderer line;
 
 
     void Start()
     {
+        line = GetComponent<LineRenderer>();
         MakeGrid();
+        
     }
 
     void Update()
     {
-        
+        MakeNodes();
     }
 
     void MakeGrid()
@@ -73,25 +80,46 @@ public class GridController : MonoBehaviour
                 Pathfinder.Node neighbor2 = lookup(x-1, y);
                 Pathfinder.Node neighbor3 = lookup(x, y+1);
                 Pathfinder.Node neighbor4 = lookup(x, y-1);
+                Pathfinder.Node neighbor5 = lookup(x+1, y+1);
+                Pathfinder.Node neighbor6 = lookup(x-1, y-1);
+                Pathfinder.Node neighbor7 = lookup(x-1, y+1);
+                Pathfinder.Node neighbor8 = lookup(x+1, y-1);
                 if(neighbor1 != null) n.neighbors.Add(neighbor1);
                 if(neighbor2 != null) n.neighbors.Add(neighbor2);
                 if(neighbor3 != null) n.neighbors.Add(neighbor3);
                 if(neighbor4 != null) n.neighbors.Add(neighbor4);
+                if(neighbor5 != null) n.neighbors.Add(neighbor5);
+                if(neighbor6 != null) n.neighbors.Add(neighbor6);
+                if(neighbor7 != null) n.neighbors.Add(neighbor7);
+                if(neighbor8 != null) n.neighbors.Add(neighbor8);
             }
         }
 
-        Pathfinder.Node start = nodes[
-            (int)Random.Range(0, nodes.GetLength(0)),
-            (int)Random.Range(0,nodes.GetLength(0))
-        ];
-
-        Pathfinder.Node end = nodes[
-            (int)Random.Range(0, nodes.GetLength(1)),
-            (int)Random.Range(0, nodes.GetLength(1))
-        ];
+        Pathfinder.Node start = Lookup(helperStart.position, nodes);
+        Pathfinder.Node end = Lookup(helperEnd.position, nodes);
 
         List<Pathfinder.Node> path = Pathfinder.Solve(start, end);
-        print(path.Count);
+        Vector3[] positions = new Vector3[path.Count];
+        for(int i = 0; i < path.Count; i ++)
+        {
+            positions[i] = path[i].position + new Vector3(0,.5f,0);
+        }
+        line.positionCount = positions.Length;
+        line.SetPositions(positions);
+    }
+
+    public Pathfinder.Node Lookup(Vector3 pos, Pathfinder.Node[,] nodes)
+    {
+        float w = 1;
+        float h = 1;
+
+        int x = (int)(pos.x / w);
+        int y = (int)(pos.z / h);
+
+        if(x<0 || y < 0) return null;
+        if(x >= nodes.GetLength(0) || y >= nodes.GetLength(1)) return null;
+
+        return nodes[x,y];
     }
 }
 

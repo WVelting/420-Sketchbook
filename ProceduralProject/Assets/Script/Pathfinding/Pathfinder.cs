@@ -19,31 +19,36 @@ public static class Pathfinder
         public float moveCost = 1; //change value for different terrain
 
         public List<Node> neighbors = new List<Node>();
-        private Node _parent;
-        public Node parent{
-            get{
-                return _parent;
-            }
-            set{
-                _parent = value;
-                if(_parent != null) G = _parent.G + moveCost;
-                else G = 0;
-            }
-        }
+        public Node parent {get; private set;}
+        
 
         public void DoHeuristic(Node end)
         {
             Vector3 d = end.position - this.position;
             H = d.magnitude;
         }
+        public void UpdateParentAndG(Node parent, float extraG = 0)
+    {
+        this.parent = parent;
+        if(parent != null)
+        {
+            G = parent.G + moveCost + extraG;
+        }
+        else G = extraG;
     }
+    }
+
+    
 
     public static List<Node> Solve(Node start, Node end)
     {
+        if(start == null || end == null) return new List<Node>();
+        
+
         List<Node> open = new List<Node>();
         List<Node> closed = new List<Node>();
 
-        start.parent = null;
+        start.UpdateParentAndG(null);
         open.Add(start);
 
         //1. find path from start to end
@@ -73,7 +78,11 @@ public static class Pathfinder
                     if(!open.Contains(neighbor)) //node not in OPEN
                     {
                         open.Add(neighbor);
-                        neighbor.parent = current;
+
+
+                        float dis = (neighbor.position - current.position).magnitude;
+
+                        neighbor.UpdateParentAndG(current, dis);
 
                         if(neighbor == end)
                         {
@@ -89,8 +98,10 @@ public static class Pathfinder
                         //TODO: if G cost is lower, change neighbor's parent
                         if(neighbor.G > current.G + neighbor.moveCost)
                         {
+                            float dis = (neighbor.position - current.position).magnitude;
+
                             //it's shorter to move to neighbor from current
-                            neighbor.parent = current;
+                            neighbor.UpdateParentAndG(current, dis);
                         }
                     }
                 }

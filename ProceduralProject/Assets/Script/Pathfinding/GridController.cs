@@ -53,7 +53,7 @@ public class GridController : MonoBehaviour
                 Pathfinder.Node n = new Pathfinder.Node();
 
                 n.position = cubes[x,y].transform.position;
-                n.moveCost = cubes[x,y].isSolid ? 9999 : 1;
+                n.moveCost = cubes[x,y].MoveCost;
                 
                 nodes[x,y] = n;
             }

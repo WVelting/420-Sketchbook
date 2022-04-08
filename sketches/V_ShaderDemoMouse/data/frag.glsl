@@ -8,6 +8,10 @@ uniform vec2 texOffset; // size of a texel
 varying vec4 vertTexCoord; // uv value at this pixel
 varying vec4 vertColor; // vertex color at this pixel
 
+// own variables for experimentation
+
+uniform vec2 mouse; //mouse position
+
 // runs "once per pixel":
 void main()
 {
@@ -15,23 +19,13 @@ void main()
     float ratio = texOffset.x / texOffset.y;
 
     // sample color from neighboring pixel
-    vec2 uv = vertTexCoord.xy - vec2(.5);
-    //uv.x += texOffset.x;
+    vec2 uv = vertTexCoord.xy - mouse;
+    
+    float dis = length(uv);
 
-    // switch to polar coord
-    float mag = length(uv); // dis from center
-    float rad = atan(uv.y, uv.x); // angle from center
-
-    mag -= .01;
-    rad +=.01;
-
-    uv.x = mag * cos(rad);
-    uv.y = mag * sin(rad);
-
-    uv += vec2(.5); // move origin back to zero
     
     // lookup pixel color at uv coordinate:
-    vec4 color = texture2D(texture, uv.xy);
+    vec4 color = vec4(dis, dis, dis, 1);
 
 
     //set the pixel color of gl_FragColor

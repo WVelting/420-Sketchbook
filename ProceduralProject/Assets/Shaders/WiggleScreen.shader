@@ -49,7 +49,7 @@ Shader "Wills Shaders/WiggleScreen"
                 
 
                 fixed4 colorNoise = tex2D(_NoiseTex, uv + float2(0,-_Time.x));
-
+                
                 uv += colorNoise.rg/10;
                 
                 fixed4 col = tex2D(_MainTex, uv);

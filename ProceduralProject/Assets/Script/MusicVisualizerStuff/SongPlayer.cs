@@ -42,7 +42,11 @@ public class SongPlayer : MonoBehaviour
     void Update()
     {
         if(!player.isPlaying) PlayTrackNext();
-        if(Input.GetButtonDown("Jump")) PlayTrackNext();
+        if(Input.GetKeyDown(KeyCode.Space)) 
+        {
+            player.Stop();
+            PlayTrackNext();
+        }
     }
 
 }

@@ -6,18 +6,29 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class SimpleVizOne : MonoBehaviour
 {
-    public float radius = 10;
-    public float amp = 5;
+    static public SimpleVizOne viz {get; private set;}
+    public float ringRadius = 10;
+    public float ringHeight = 5;
     public float orbHeight = 10;
+    public float avgAmp = 0;
     public int numBands = 512;
-    public Transform prefabOrb;
+    public Orb prefabOrb;
+    public PostProcessing ppShader;
 
     private AudioSource player;
     private LineRenderer line;
 
-    private List<Transform> orbs = new List<Transform>();
+    private List<Orb> orbs = new List<Orb>();
     void Start()
     {
+
+        if(!viz) viz = this;
+        else 
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         player = GetComponent<AudioSource>();
         line = GetComponent<LineRenderer>();
 
@@ -28,6 +39,11 @@ public class SimpleVizOne : MonoBehaviour
             Vector3 p = new Vector3(0, i * orbHeight / numBands, 0);
             orbs.Add(Instantiate(prefabOrb, p, q, transform));
         }
+    }
+
+    void OnDestroy()
+    {
+        if(viz == this) viz = null;
     }
 
     void Update()
@@ -41,11 +57,17 @@ public class SimpleVizOne : MonoBehaviour
         float[] bands = new float[numBands];
         player.GetSpectrumData(bands, 0, FFTWindow.BlackmanHarris);
 
+        avgAmp = 0;
         for (int i = 0; i < orbs.Count; i++)
         {
-            float p = (i + 1) / (float) numBands;
-            orbs[i].localScale = Vector3.one * bands[i] * 200 * p;
+            //float p = (i + 1) / (float) numBands;
+            //orbs[i].localScale = Vector3.one * bands[i] * 200 * p;
+            avgAmp += bands[i]; // add to average
+            orbs[i].UpdateAudioData(bands[i] * 100);
         }
+        avgAmp /= numBands;
+        avgAmp *= 10000;
+        ppShader.UpdateAmp(avgAmp);
     }
 
     private void UpdateWaveform()
@@ -56,18 +78,20 @@ public class SimpleVizOne : MonoBehaviour
 
         Vector3[] points = new Vector3[samples];
 
+
         for (int i = 0; i < data.Length; i++)
         {
             float sample = data[i];
 
             float rads = Mathf.PI * 2 * i / samples;
 
-            float x = Mathf.Cos(rads) * radius;
-            float y = sample * amp;
-            float z = Mathf.Sin(rads) * radius;
+            float x = Mathf.Cos(rads) * ringRadius;
+            float y = sample * ringHeight;
+            float z = Mathf.Sin(rads) * ringRadius;
 
             points[i] = new Vector3(x, y, z);
         }
+
 
         line.positionCount = points.Length;
         line.SetPositions(points);

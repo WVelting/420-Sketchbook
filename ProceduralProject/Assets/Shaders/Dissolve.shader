@@ -7,6 +7,7 @@ Shader "Wills Shaders/Dissolve"
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
         _Threshold ("Threshold", Range(0,1)) = 0.5
+        _TimeOffset ("Time Offset", Float) = 0.0
     }
     SubShader
     {
@@ -31,6 +32,7 @@ Shader "Wills Shaders/Dissolve"
 
         half _Glossiness;
         half _Metallic;
+        half _TimeOffset;
         fixed4 _Color;
         float _Threshold;
 
@@ -48,7 +50,7 @@ Shader "Wills Shaders/Dissolve"
             
             // Albedo comes from a texture tinted by color
             fixed4 c = _Color;
-            float t = sin(_Time.y) * .5 + .5;
+            float t = sin(_Time.y + _TimeOffset) * .5 + .5;
             if(noise.r > t)
             {
                 c = float4(0,0,0,0);

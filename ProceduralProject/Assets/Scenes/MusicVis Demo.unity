@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 92317583}
   - component: {fileID: 92317582}
   - component: {fileID: 92317581}
+  - component: {fileID: 92317584}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -207,6 +208,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &92317584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92317580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 814c32c82e846084685790f0d68d71c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 7be65c0f7753c3d4c8b9c6328806ba80, type: 3}
+  noiseTexture: {fileID: 2800000, guid: ff3bd05f1256fbb46981f1ef9b808b43, type: 3}
 --- !u!1 &1545143736
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +253,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f9b15dc0d7c2d434b9a266a269cc218a, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -464,11 +479,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96bf66622774364f97e4fc48b277d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10
-  amp: 5
+  ringRadius: 10
+  ringHeight: 5
   orbHeight: 10
+  avgAmp: 0
   numBands: 512
-  prefabOrb: {fileID: 7604071001325322708, guid: aad75228f837a0d4cad30cb2a9d98e29, type: 3}
+  prefabOrb: {fileID: -8588555506896418404, guid: aad75228f837a0d4cad30cb2a9d98e29, type: 3}
+  ppShader: {fileID: 92317584}
 --- !u!1 &1701932957
 GameObject:
   m_ObjectHideFlags: 0

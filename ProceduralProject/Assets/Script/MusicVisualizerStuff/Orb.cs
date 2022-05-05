@@ -21,7 +21,7 @@ public class Orb : MonoBehaviour
 
     public void UpdateAudioData(float val)
     {
-        Mathf.Clamp(val, 1, 5);
+        Mathf.Clamp(val, .05f, 10);
         transform.localScale = Vector3.one * (transform.localScale.x + val);
     }
 
@@ -30,7 +30,7 @@ public class Orb : MonoBehaviour
         Vector3 vToViz = viz.transform.position - transform.position;
         Vector3 dirToViz = vToViz.normalized;
 
-        transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, .01f);
+        transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, .1f);
         
 
         body.AddForce(dirToViz * cohesionForce * Time.deltaTime);

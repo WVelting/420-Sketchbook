@@ -5,6 +5,7 @@ using UnityEngine;
 public class PostProcessing : MonoBehaviour
 {
     public Shader shader;
+    public float depth;
     private Material mat;
 
     public Texture noiseTexture;
@@ -24,5 +25,10 @@ public class PostProcessing : MonoBehaviour
     {
         Graphics.Blit(src, dst, mat);
         
+    }
+
+    public void Update()
+    {
+        mat.SetFloat("_Amp", depth);
     }
 }

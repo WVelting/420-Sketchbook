@@ -46,11 +46,19 @@ Shader "Hidden/Depth"
             {
                 fixed depth = tex2D(_CameraDepthTexture, i.uv).r;
 
-                depth *= _Amp;
+                //depth *= _Amp;
 
                 fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 screen = col;
 
-                fixed4 screen = col * depth;
+                if(depth > _Amp)
+                {
+
+                screen = fixed4(0,0,0,1);
+
+                }
+                
+                
 
                 //depth = 1 - ((1 - Linear01Depth(depth)) / 10.0);
                 //depth = DECODE_EYEDEPTH(depth)/LinearEyeDepth(depth);

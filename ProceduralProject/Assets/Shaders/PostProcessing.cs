@@ -23,5 +23,6 @@ public class PostProcessing : MonoBehaviour
     void OnRenderImage(RenderTexture src, RenderTexture dst)
     {
         Graphics.Blit(src, dst, mat);
+        
     }
 }

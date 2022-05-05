@@ -13,7 +13,6 @@ public class SimpleVizOne : MonoBehaviour
     public float avgAmp = 0;
     public int numBands = 512;
     public Orb prefabOrb;
-    public PostProcessing ppShader;
 
     private AudioSource player;
     private LineRenderer line;
@@ -57,17 +56,12 @@ public class SimpleVizOne : MonoBehaviour
         float[] bands = new float[numBands];
         player.GetSpectrumData(bands, 0, FFTWindow.BlackmanHarris);
 
-        avgAmp = 0;
         for (int i = 0; i < orbs.Count; i++)
         {
             //float p = (i + 1) / (float) numBands;
             //orbs[i].localScale = Vector3.one * bands[i] * 200 * p;
-            avgAmp += bands[i]; // add to average
             orbs[i].UpdateAudioData(bands[i] * 100);
         }
-        avgAmp /= numBands;
-        avgAmp *= 10000;
-        ppShader.UpdateAmp(avgAmp);
     }
 
     private void UpdateWaveform()

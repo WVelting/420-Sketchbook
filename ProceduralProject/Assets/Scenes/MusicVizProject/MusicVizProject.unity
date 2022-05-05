@@ -545,8 +545,7 @@ MonoBehaviour:
   orbHeight: 10
   avgAmp: 0
   numBands: 512
-  prefabOrb: {fileID: -8588555506896418404, guid: aad75228f837a0d4cad30cb2a9d98e29, type: 3}
-  ppShader: {fileID: 0}
+  prefabOrb: {fileID: -8588555506896418404, guid: 001ac36aaff1b444d83d8531712d17d5, type: 3}
 --- !u!120 &367671781
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -593,7 +592,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:

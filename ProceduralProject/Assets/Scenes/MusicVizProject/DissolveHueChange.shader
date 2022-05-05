@@ -1,4 +1,4 @@
-Shader "Wills Shaders/Dissolve"
+Shader "Wills Shaders/DissolveHueChange"
 {
     Properties
     {

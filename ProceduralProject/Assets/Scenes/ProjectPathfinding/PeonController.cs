@@ -10,6 +10,7 @@ public class PeonController : MonoBehaviour
     public float health = 10;
     private CastleScript castle;
     public SpawnerController spawner;
+    private AvatarScript avatar;
 
     private List<Pathfinder.Node> pathToTarget = new List<Pathfinder.Node>();
     private bool shouldCheckAgain = true;
@@ -18,6 +19,7 @@ public class PeonController : MonoBehaviour
 
     void Start()
     {
+        SpawnerController.AddMinion(this);
         line = GetComponent<LineRenderer>();
         castle = FindObjectOfType<CastleScript>();
         moveTarget = castle.transform;
@@ -25,10 +27,11 @@ public class PeonController : MonoBehaviour
 
     void Update()
     {
+        avatar = FindObjectOfType<AvatarScript>();
         if((transform.position - moveTarget.position).sqrMagnitude <=4)
         {
             castle.health -= 5;
-            SpawnerController.singleton.minions.Remove(this);
+            SpawnerController.RemoveMinion(this);
             Destroy(gameObject);
 
         }
@@ -39,8 +42,13 @@ public class PeonController : MonoBehaviour
         }
         if(health <= 0)
         {
-            SpawnerController.singleton.minions.Remove(this);
+            SpawnerController.RemoveMinion(this);
             Destroy(gameObject);
+        }
+        if((transform.position - avatar.transform.position).sqrMagnitude <=4)
+        {
+            avatar.health-=5;
+            health-=5;
         }
 
         checkAgainIn -= Time.deltaTime;

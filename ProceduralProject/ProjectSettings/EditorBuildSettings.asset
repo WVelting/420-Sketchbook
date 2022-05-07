@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ProjectPathfinding/PathfindingProject.unity
     guid: 14044d6831c182442b1ed20ad04311d1
+  - enabled: 1
+    path: Assets/Scenes/ProjectPathfinding/YouLose.unity
+    guid: 0539b7bcc73ccde4f973c8fa4ab3612f
+  - enabled: 1
+    path: Assets/Scenes/ProjectPathfinding/YouWin.unity
+    guid: eb733b9e1fa283544b6353473b241cd5
   m_configObjects: {}

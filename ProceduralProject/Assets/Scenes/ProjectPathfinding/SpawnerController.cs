@@ -21,9 +21,18 @@ public class SpawnerController : MonoBehaviour
         spawnTimer -= Time.deltaTime;
         if(singleton.minions.Count < 10 && spawnTimer <= 0)
         {   
-            singleton.minions.Add(Instantiate(prefab, new Vector3(Random.Range(10,30), .5f, Random.Range(25,35)), Quaternion.identity));
+            Instantiate(prefab, new Vector3(Random.Range(10,30), .5f, Random.Range(25,35)), Quaternion.identity);
             spawnTimer = .5f;
         }
         
+    }
+
+    public static void AddMinion(PeonController m)
+    {
+        singleton.minions.Add(m);
+    }
+    public static void RemoveMinion(PeonController m)
+    {
+        singleton.minions.Remove(m);
     }
 }

@@ -11,7 +11,8 @@ public class SimpleVizOne : MonoBehaviour
     public float ringHeight = 5;
     public float orbHeight = 10;
     public float avgAmp = 0;
-    public int numBands = 512;
+    public int numBands = 128;
+    public List<ChunkMeshController> chunks = new List<ChunkMeshController>();
     public Orb prefabOrb;
 
     private AudioSource player;
@@ -61,12 +62,17 @@ public class SimpleVizOne : MonoBehaviour
             //float p = (i + 1) / (float) numBands;
             //orbs[i].localScale = Vector3.one * bands[i] * 200 * p;
             orbs[i].UpdateAudioData(bands[i] * 100);
+        
+        for (int c = 0; c<chunks.Count; c++)
+        {
+            chunks[c].UpdateAudioData(bands[c] * 10);
+        }
         }
     }
 
     private void UpdateWaveform()
     {
-        int samples = 2048;
+        int samples = 1024;
         float[] data = new float[samples];
         player.GetOutputData(data, 0);
 

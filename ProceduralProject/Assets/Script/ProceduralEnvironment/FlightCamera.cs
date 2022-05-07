@@ -16,7 +16,6 @@ public class FlightCamera : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()

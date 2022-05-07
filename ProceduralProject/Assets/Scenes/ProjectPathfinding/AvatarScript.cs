@@ -12,7 +12,7 @@ public class AvatarScript : MonoBehaviour
     private bool shouldCheckAgain = true;
     private float checkAgainIn = 0;
     private LineRenderer line;
-    public float health = 5;
+    public float health = 15;
 
     void Start()
     {

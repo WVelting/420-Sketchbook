@@ -16,7 +16,7 @@ public class GridController : MonoBehaviour
     public Transform helperStart;
     public Transform helperEnd;
 
-    private TerrainCube[,] cubes;
+    public TerrainCube[,] cubes;
     private Pathfinder.Node[,] nodes;
 
 
@@ -44,18 +44,18 @@ public class GridController : MonoBehaviour
 
     void MakeGrid()
     {
-        int size = 19;
+        int size = 40;
         cubes = new TerrainCube[size,size];
         for(int x = 0; x < size; x++)
         {
             for(int y = 0; y < size; y++)
             {
-                float zoom = 10;
-                float amp = 10;
-                float verticalPos = Mathf.PerlinNoise(x/zoom, y/zoom) * amp;
+                // float zoom = 10;
+                // float amp = 10;
+                // float verticalPos = Mathf.PerlinNoise(x/zoom, y/zoom) * amp;
 
 
-                cubes[x,y] = Instantiate(cubePrefab, new Vector3(x, verticalPos, y), Quaternion.identity);
+                cubes[x,y] = Instantiate(cubePrefab, new Vector3(x, 0, y), Quaternion.identity);
             }
         }
     }
@@ -97,18 +97,10 @@ public class GridController : MonoBehaviour
                 Pathfinder.Node neighbor2 = lookup(x-1, y);
                 Pathfinder.Node neighbor3 = lookup(x, y+1);
                 Pathfinder.Node neighbor4 = lookup(x, y-1);
-                Pathfinder.Node neighbor5 = lookup(x+1, y+1);
-                Pathfinder.Node neighbor6 = lookup(x-1, y-1);
-                Pathfinder.Node neighbor7 = lookup(x-1, y+1);
-                Pathfinder.Node neighbor8 = lookup(x+1, y-1);
                 if(neighbor1 != null) n.neighbors.Add(neighbor1);
                 if(neighbor2 != null) n.neighbors.Add(neighbor2);
                 if(neighbor3 != null) n.neighbors.Add(neighbor3);
                 if(neighbor4 != null) n.neighbors.Add(neighbor4);
-                if(neighbor5 != null) n.neighbors.Add(neighbor5);
-                if(neighbor6 != null) n.neighbors.Add(neighbor6);
-                if(neighbor7 != null) n.neighbors.Add(neighbor7);
-                if(neighbor8 != null) n.neighbors.Add(neighbor8);
             }
         }
 

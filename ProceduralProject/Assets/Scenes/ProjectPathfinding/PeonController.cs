@@ -7,7 +7,7 @@ public class PeonController : MonoBehaviour
 {
 
     public Transform moveTarget;
-    public float health = 10;
+    private float health = 5;
     private CastleScript castle;
     public SpawnerController spawner;
     private AvatarScript avatar;

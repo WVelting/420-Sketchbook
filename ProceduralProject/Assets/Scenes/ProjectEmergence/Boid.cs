@@ -49,7 +49,7 @@ public class Boid : MonoBehaviour
         foreach(Boid b in boids)
         {
             
-
+            
             Vector3 vToOther = b.transform.position - transform.position;
             float d = vToOther.magnitude;
 
@@ -63,7 +63,7 @@ public class Boid : MonoBehaviour
                 numCohesion++;
 
             }
-            if(d < settings.radiusSeparation)
+            if(d < settings.radiusSeparation && d != 0)
             {
                 Vector3 separation = (-vToOther/d) * (settings.forceSeparation/d) * Time.deltaTime;
                 body.AddForce(separation);

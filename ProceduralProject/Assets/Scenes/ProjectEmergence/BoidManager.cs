@@ -9,7 +9,8 @@ public class BoidSettings{
     public Boid prefab;
     public float maxSpeed;
     public float maxForce;
-
+    public float lifeSpan;
+    public float sightLength;
     public float radiusAlignment;
     public float radiusCohesion;
     public float radiusSeparation;
@@ -59,10 +60,11 @@ public class BoidManager : MonoBehaviour
 
     void Update()
     {
+        
 
         // if not enough boids, spawn boids:
 
-        if(boids.Count < 5)
+        if(boids.Count < 20)
         {
             if(settings.Length> 0)
             {

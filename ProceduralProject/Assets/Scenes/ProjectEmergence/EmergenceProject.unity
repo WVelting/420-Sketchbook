@@ -241,6 +241,8 @@ MonoBehaviour:
     prefab: {fileID: 2424097931165524886, guid: 045ff24acc877e941b63a4f8a3047d28, type: 3}
     maxSpeed: 5
     maxForce: 1
+    lifeSpan: 30
+    sightLength: 500
     radiusAlignment: 200
     radiusCohesion: 250
     radiusSeparation: 40
@@ -251,6 +253,8 @@ MonoBehaviour:
     prefab: {fileID: 7920693494113418858, guid: cfc2c1dd414cc4b4eb9ed690b677e194, type: 3}
     maxSpeed: 0
     maxForce: 0
+    lifeSpan: 0
+    sightLength: 0
     radiusAlignment: 0
     radiusCohesion: 0
     radiusSeparation: 0
@@ -272,6 +276,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &563381497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 563381498}
+  - component: {fileID: 563381499}
+  m_Layer: 0
+  m_Name: FoodSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &563381498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563381497}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &563381499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563381497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531b3c39b9ceb8c409d8329abdbf5492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodSpawner: {fileID: 563381498}
+  food: {fileID: 824963430598568423, guid: 20d65c9d74e58ad41a831edf188689da, type: 3}
+  boid: {fileID: 2424097931165524886, guid: 045ff24acc877e941b63a4f8a3047d28, type: 3}
 --- !u!1 &957388339
 GameObject:
   m_ObjectHideFlags: 0
